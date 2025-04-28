@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "ConfigParser.hpp"
+#include "config/ConfigParser.hpp"
 
 int main() {
   Config config = ConfigParser::loadFromFile("material.json");

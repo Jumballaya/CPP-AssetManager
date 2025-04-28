@@ -7,7 +7,7 @@
 #include <string_view>
 
 #include "Config.hpp"
-#include "TextCursor.hpp"
+#include "parser/TextCursor.hpp"
 
 class ConfigParser {
  public:
