@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <string>
+#include <string_view>
 
 #include "Config.hpp"
 #include "TextCursor.hpp"
@@ -18,27 +20,38 @@ class ConfigParser {
 
     std::stringstream buffer;
     buffer << file.rdbuf();
-    parseJsonLike(buffer.str(), config);
 
+    std::string fileContents = buffer.str();
+    TextCursor cursor(fileContents);
+    parseJsonLike(cursor, config, "");
     return config;
   }
 
  private:
-  static void parseJsonLike(const std::string& text, Config& config) {
-    TextCursor cursor(text);
+  static void parseJsonLike(TextCursor& cursor, Config& config, std::string_view parent) {
+    char peekCh = cursor.peekChar();
+    int line = cursor.line();
+    int col = cursor.column();
     char ch = cursor.nextChar();
+    std::cout << "nextChar: '" << ch << "'\n"
+              << "peekChar: '" << peekCh << "'\n"
+              << "line: '" << line << "'\n"
+              << "column: '" << col << "'\n"
+              << std::endl;
     if (ch != '{') throwParserError("JSON must start with '{'", cursor);
 
     while (true) {
       if (ch == '\0') break;
 
       if (cursor.peekChar() != '"') throwParserError("JSON keys are strings that start with '\"'", cursor);
-      auto key = parseKey(cursor);
+      auto key = parent == "" ? parseKey(cursor) : (std::string(parent) + "." + parseKey(cursor));
       ch = cursor.nextChar();
       if (ch != ':') throwParserError("JSON keys and values are separated with ':'", cursor);
 
       auto peek = cursor.peekChar();
-      if (peek == '"') {
+      if (peek == '{') {
+        parseJsonLike(cursor, config, key);
+      } else if (peek == '"') {
         config.set(key, parseString(cursor));
       } else if (isNumber(peek)) {
         config.set(key, parseNumber(cursor));

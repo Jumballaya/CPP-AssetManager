@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include "ConfigParser.hpp"
@@ -13,4 +14,7 @@ int main() {
   if (auto materialName = config.getOptional<std::string>("materialName")) {
     std::cout << "Material: " << *materialName << '\n';
   }
+  auto c = config.get<std::string>("nested.b.c");
+
+  std::cout << "nested.b.c: " << c << std::endl;
 }

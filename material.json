@@ -3,5 +3,11 @@
   "roughness": 0.7,
   "metallic": 0.1,
   "materialName": "Leather",
-  "useAlphaBlend": true
+  "useAlphaBlend": true,
+  "nested": {
+    "a": "apple",
+    "b": {
+      "c": "clack"
+    }
+  }
 }
