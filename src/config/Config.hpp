@@ -22,7 +22,7 @@ class Config {
   }
 
   template <typename T>
-  std::optional<T> getOptional(const std::string& key) {
+  std::optional<T> getOptional(const std::string& key) const {
     auto it = _entries.find(key);
     if (it == _entries.end()) return std::nullopt;
     if (!it->second.is<T>()) return std::nullopt;

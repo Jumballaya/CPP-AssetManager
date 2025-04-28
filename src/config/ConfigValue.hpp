@@ -12,7 +12,8 @@ using ValueVariant = std::variant<
     bool,
     uint32_t,
     std::string,
-    std::vector<float>>;
+    std::vector<float>,
+    std::vector<uint32_t>>;
 
 class ConfigValue {
  public:

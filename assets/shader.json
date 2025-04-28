@@ -1,0 +1,4 @@
+{
+  "vertexPath": "shaders/basic.vert",
+  "fragmentPath": "shaders/basic.frag"
+}

@@ -33,11 +33,6 @@ class ConfigParser {
     int line = cursor.line();
     int col = cursor.column();
     char ch = cursor.nextChar();
-    std::cout << "nextChar: '" << ch << "'\n"
-              << "peekChar: '" << peekCh << "'\n"
-              << "line: '" << line << "'\n"
-              << "column: '" << col << "'\n"
-              << std::endl;
     if (ch != '{') throwParserError("JSON must start with '{'", cursor);
 
     while (true) {
