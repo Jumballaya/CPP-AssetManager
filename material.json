@@ -1,13 +1,9 @@
 {
-  "albedoColor": [1.0, 0.5, 0.2],
-  "roughness": 0.7,
-  "metallic": 0.1,
-  "materialName": "Leather",
-  "useAlphaBlend": true,
-  "nested": {
-    "a": "apple",
-    "b": {
-      "c": "clack"
-    }
-  }
+  "shaderId": 1,
+  "baseColor": [1, 1, 1, 1],
+  "metallic": 0.2,
+  "roughness": 0.1,
+  "albedoTextureId": 2,
+  "normalTextureId": 3,
+  "metallicRoughnessTextureId": 4
 }

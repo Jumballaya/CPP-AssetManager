@@ -13,7 +13,7 @@ class Config {
   ~Config() = default;
 
   template <typename T>
-  T get(const std::string& key) {
+  T get(const std::string& key) const {
     auto it = _entries.find(key);
     if (it == _entries.end()) {
       throw std::runtime_error("Config key not found: " + key);

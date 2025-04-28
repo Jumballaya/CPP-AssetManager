@@ -144,7 +144,7 @@ class ConfigParser {
     if (numStr.find('.') != std::string::npos) {
       return ConfigValue(std::stof(numStr));
     }
-    return ConfigValue(std::stoi(numStr));
+    return ConfigValue(static_cast<uint32_t>(std::stoul(numStr)));
   }
 
   static ConfigValue parseArray(TextCursor& cursor) {
@@ -164,8 +164,8 @@ class ConfigParser {
 
       if (value.is<float>()) {
         array.push_back(value.get<float>());
-      } else if (value.is<int>()) {
-        array.push_back(static_cast<float>(value.get<int>()));
+      } else if (value.is<uint32_t>()) {
+        array.push_back(static_cast<float>(value.get<uint32_t>()));
       } else {
         throwParserError("Expected number inside array", cursor);
       }

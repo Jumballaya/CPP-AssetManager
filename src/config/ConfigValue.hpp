@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <ostream>
 #include <string>
 #include <variant>
@@ -9,8 +10,9 @@ using ValueVariant = std::variant<
     int,
     float,
     bool,
+    uint32_t,
     std::string,
-    std::vector<float> >;
+    std::vector<float>>;
 
 class ConfigValue {
  public:
@@ -18,7 +20,7 @@ class ConfigValue {
   ConfigValue(ValueVariant v) : _value(std::move(v)) {}
 
   template <typename T>
-  const T& get() {
+  const T& get() const {
     return std::get<T>(_value);
   }
 
